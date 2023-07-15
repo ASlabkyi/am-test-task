@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import useBeerStore from 'utils/store';
+import BeerItem from 'components/BeerListItem/BeerListItem';
 
 const BeerList = () => {
   const beersList = useBeerStore(state => state.beerList);
@@ -31,21 +30,15 @@ const BeerList = () => {
       )}
       <ul>
         {beersList?.slice(0, 15).map(({ id, name, image_url: imageUrl }) => {
-          const uniqueKey = nanoid();
           return (
-            <li
-              key={uniqueKey}
-              onContextMenu={event => handleRightClick(event, id)}
-              style={{
-                background: selectedBeers.includes(id) ? 'lightblue' : 'white',
-                cursor: 'pointer',
-              }}
-            >
-              <Link to={`/${id}`}>
-                {/* <img src={imageUrl} alt={name} /> */}
-                <h2>{name}</h2>
-              </Link>
-            </li>
+            <BeerItem
+              key={id}
+              id={id}
+              name={name}
+              imageUrl={imageUrl}
+              handleRightClick={handleRightClick}
+              selected={selectedBeers.includes(id)}
+            />
           );
         })}
       </ul>
