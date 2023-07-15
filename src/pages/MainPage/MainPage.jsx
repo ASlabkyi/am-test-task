@@ -6,6 +6,7 @@ const MainPage = () => {
   const fetchBeerList = useBeerStore(state => state.fetchBeerList);
 
   useEffect(() => {
+    localStorage.clear();
     fetchBeerList(1);
   }, [fetchBeerList]);
 

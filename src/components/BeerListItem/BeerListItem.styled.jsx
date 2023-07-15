@@ -5,18 +5,13 @@ export const Item = styled.li`
   justify-content: center;
   padding-top: 30vh;
   padding-bottom: 30vh;
+  text-align: center;
 
   img {
     max-height: 400px;
   }
 
   a {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
     color: #333;
     text-decoration: none;
     cursor: pointer;
@@ -31,4 +26,18 @@ export const Item = styled.li`
     font-size: 24px;
     margin-bottom: 0.5rem;
   }
+`;
+
+export const ItemWrapper = styled.div`
+  padding: 10px;
+  border-radius: 10px;
+  height: 510px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  transition: background 0.2s ease-in-out;
 `;
