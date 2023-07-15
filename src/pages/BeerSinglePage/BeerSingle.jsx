@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useBeerStore } from 'utils/store';
+import useBeerStore from 'utils/store';
 
 const BeerSingle = () => {
   const { id } = useParams();

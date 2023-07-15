@@ -1,9 +1,10 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-export const useBeerStore = create((set, get) => ({
+const useBeerStore = create((set, get) => ({
   beerList: [],
   page: 1,
+  selectedBeers: [],
 
   fetchBeerList: async page => {
     try {
@@ -15,4 +16,28 @@ export const useBeerStore = create((set, get) => ({
       alert(error.message);
     }
   },
+
+  toggleBeerSelection: id => {
+    set(state => {
+      const isSelected = state.selectedBeers.includes(id);
+      const updatedSelectedBeers = isSelected
+        ? state.selectedBeers.filter(beerId => beerId !== id)
+        : [...state.selectedBeers, id];
+      return { selectedBeers: updatedSelectedBeers };
+    });
+  },
+
+  deleteSelectedBeers: () => {
+    set(state => {
+      const filteredBeerList = state.beerList.filter(
+        beer => !state.selectedBeers.includes(beer.id)
+      );
+      return {
+        beerList: filteredBeerList,
+        selectedBeers: [],
+      };
+    });
+  },
 }));
+
+export default useBeerStore;
