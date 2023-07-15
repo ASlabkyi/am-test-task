@@ -7,12 +7,15 @@ const useBeerStore = create((set, get) => ({
   page: 1,
   selectedBeers: [],
   isFetched: false,
+  isLoading: false,
 
   fetchBeerList: async page => {
-    const { isFetched } = get();
-    if (isFetched) {
+    const { isFetched, isLoading } = get();
+    if (isFetched || isLoading) {
       return;
     }
+
+    set({ isLoading: true });
 
     try {
       const data = await getBeersList(page);
@@ -22,6 +25,8 @@ const useBeerStore = create((set, get) => ({
       }));
     } catch (error) {
       alert(error.message);
+    } finally {
+      set({ isLoading: false });
     }
   },
 

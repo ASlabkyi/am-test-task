@@ -1,5 +1,6 @@
 import useBeerStore from 'utils/store';
 import BeerItem from 'components/BeerListItem/BeerListItem';
+import { BeerListContainer } from './BeerList.styled';
 
 const BeerList = () => {
   const beersList = useBeerStore(state => state.beerList);
@@ -11,8 +12,6 @@ const BeerList = () => {
     event.preventDefault();
     toggleBeerSelection(id);
   };
-
-  console.log(beersList);
 
   return (
     <div>
@@ -28,7 +27,7 @@ const BeerList = () => {
           Delete
         </button>
       )}
-      <ul>
+      <BeerListContainer>
         {beersList?.slice(0, 15).map(({ id, name, image_url: imageUrl }) => {
           return (
             <BeerItem
@@ -41,7 +40,7 @@ const BeerList = () => {
             />
           );
         })}
-      </ul>
+      </BeerListContainer>
     </div>
   );
 };
