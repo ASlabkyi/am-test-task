@@ -23,7 +23,7 @@ const useBeerStore = create(
         try {
           const data = await getBeersList(page);
           set(state => ({
-            beerList: [...state.beerList, ...data],
+            beerList: [...data],
             isFetched: true,
           }));
         } catch (error) {

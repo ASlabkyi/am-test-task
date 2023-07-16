@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { Item, ItemWrapper } from './BeerListItem.styled';
+import { Item, ItemWrapper, ImageContainer } from './BeerListItem.styled';
 
 const BeerItem = memo(({ id, name, imageUrl, handleRightClick, selected }) => {
   return (
@@ -14,7 +14,9 @@ const BeerItem = memo(({ id, name, imageUrl, handleRightClick, selected }) => {
               background: selected ? 'lightblue' : 'white',
             }}
           >
-            <img src={imageUrl} alt={name} />
+            <ImageContainer>
+              <img src={imageUrl} alt={name} />
+            </ImageContainer>
             <h2>{name}</h2>
           </ItemWrapper>
         </Link>

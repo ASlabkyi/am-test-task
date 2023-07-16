@@ -7,8 +7,11 @@ export const Item = styled.li`
   padding-bottom: 30vh;
   text-align: center;
 
+  width: 230px;
+
   img {
-    max-height: 400px;
+    max-height: 100%;
+    overflow: hidden;
   }
 
   a {
@@ -18,7 +21,7 @@ export const Item = styled.li`
     transition: color 0.2s ease-in-out;
 
     &:hover {
-      color: #ff4500;
+      color: #e53935;
     }
   }
 
@@ -32,6 +35,7 @@ export const ItemWrapper = styled.div`
   padding: 10px;
   border-radius: 10px;
   height: 510px;
+  width: 200px;
 
   display: flex;
   flex-direction: column;
@@ -40,4 +44,12 @@ export const ItemWrapper = styled.div`
   gap: 10px;
 
   transition: background 0.2s ease-in-out;
+`;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
 `;

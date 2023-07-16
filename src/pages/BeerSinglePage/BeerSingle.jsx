@@ -4,7 +4,7 @@ import useBeerStore from 'utils/store';
 
 import FoofPairing from 'components/FoodPairing/FoodPairing';
 
-import { Container } from './BeerSingle.styled';
+import { Container, ImageContainer } from './BeerSingle.styled';
 
 const BackLink = styled(Link)`
   margin-bottom: 1rem;
@@ -41,7 +41,9 @@ const BeerSingle = () => {
       <BackLink to={detailsLink} state={{ from: location }}>
         Go Back
       </BackLink>
-      <img src={imageUrl} alt={name} />
+      <ImageContainer>
+        <img src={imageUrl} alt={name} />
+      </ImageContainer>
       <h2>{name}</h2>
       <p>{description}</p>
       <h4>It tastes better with </h4>
