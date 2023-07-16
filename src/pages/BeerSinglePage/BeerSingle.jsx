@@ -1,6 +1,6 @@
 import { Link, useLocation, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import useBeerStore from 'utils/store';
+import { useBeersStore } from 'utils/store';
 
 import FoofPairing from 'components/FoodPairing/FoodPairing';
 
@@ -21,7 +21,7 @@ const BeerSingle = () => {
   const detailsLink = location.state?.from ?? '/';
   const { id } = useParams();
 
-  const beersList = useBeerStore(state => state.beerList);
+  const { beersList } = useBeersStore();
 
   const selectedBeer = beersList.find(beer => beer.id === parseInt(id));
 

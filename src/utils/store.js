@@ -80,4 +80,18 @@ const useBeerStore = create(
   )
 );
 
-export default useBeerStore;
+export const useBeersStore = () => {
+  const beersList = useBeerStore(state => state.beerList);
+  const toggleBeerSelection = useBeerStore(state => state.toggleBeerSelection);
+  const selectedBeers = useBeerStore(state => state.selectedBeers);
+  const deleteSelectedBeers = useBeerStore(state => state.deleteSelectedBeers);
+  const fetchBeerList = useBeerStore(state => state.fetchBeerList);
+
+  return {
+    beersList,
+    toggleBeerSelection,
+    selectedBeers,
+    deleteSelectedBeers,
+    fetchBeerList,
+  };
+};

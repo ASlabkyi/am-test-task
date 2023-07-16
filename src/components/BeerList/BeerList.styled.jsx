@@ -10,15 +10,18 @@ export const BeerListContainer = styled.ul`
 `;
 
 export const DeleteButton = styled.button`
-  position: absolute;
-  width: 100%;
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
   padding: 25px 30px;
   cursor: pointer;
   background-color: #ff3b30;
   color: #fff;
-  font-size: 25px;
+  font-size: 15px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   transition: background-color 0.2s ease;
 
   &:hover {

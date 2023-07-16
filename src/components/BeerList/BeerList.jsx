@@ -1,18 +1,17 @@
-import useBeerStore from 'utils/store';
+import { useBeersStore } from 'utils/store';
 import BeerItem from 'components/BeerListItem/BeerListItem';
 import { BeerListContainer, DeleteButton } from './BeerList.styled';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const BeerList = () => {
-  const beersList = useBeerStore(state => state.beerList);
-  const toggleBeerSelection = useBeerStore(state => state.toggleBeerSelection);
-  const selectedBeers = useBeerStore(state => state.selectedBeers);
-  const deleteSelectedBeers = useBeerStore(state => state.deleteSelectedBeers);
+  const { beersList, toggleBeerSelection, selectedBeers, deleteSelectedBeers } =
+    useBeersStore();
 
   const [isButtonVisible, setIsButtonVisible] = useState(false);
   const [firstVisibleItemsCount, setFirstVisibleItemsCount] = useState(0);
   const [lastVisibleItemsCount, setLastVisibleItemsCount] = useState(15);
+  const [canLoad, setCanLoad] = useState(true);
 
   useEffect(() => {
     setIsButtonVisible(selectedBeers.length > 0);
@@ -29,19 +28,33 @@ const BeerList = () => {
   });
 
   useEffect(() => {
-    if (lastVisibleItemsCount === 25) {
-      return;
-    }
-
-    if (inView) {
+    if (inView && canLoad) {
       setLastVisibleItemsCount(prevCount => prevCount + 5);
+
       setFirstVisibleItemsCount(prevCount => prevCount + 5);
     }
-  }, [inView]);
+  }, [inView, canLoad, beersList]);
+
+  useEffect(() => {
+    if (lastVisibleItemsCount >= beersList.length) {
+      setCanLoad(false);
+    } else {
+      setCanLoad(true);
+    }
+  }, [lastVisibleItemsCount, beersList]);
+
+  const handleDeleteSelectedBeers = () => {
+    deleteSelectedBeers();
+    setFirstVisibleItemsCount(0);
+    setLastVisibleItemsCount(15);
+  };
 
   return (
     <div>
-      <DeleteButton isVisible={isButtonVisible} onClick={deleteSelectedBeers}>
+      <DeleteButton
+        isVisible={isButtonVisible}
+        onClick={handleDeleteSelectedBeers}
+      >
         Delete
       </DeleteButton>
       <BeerListContainer>
